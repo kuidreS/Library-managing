@@ -1,0 +1,120 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
+
+-- Started on 2016-10-10 19:31:21 EEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2373 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 182 (class 1259 OID 26362)
+-- Name: books; Type: TABLE; Schema: public; Owner: library_managing
+--
+
+CREATE TABLE books (
+    id bigint NOT NULL,
+    author character varying(255),
+    book_name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE books OWNER TO library_managing;
+
+--
+-- TOC entry 181 (class 1259 OID 26360)
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: library_managing
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE hibernate_sequence OWNER TO library_managing;
+
+--
+-- TOC entry 2365 (class 0 OID 26362)
+-- Dependencies: 182
+-- Data for Name: books; Type: TABLE DATA; Schema: public; Owner: library_managing
+--
+
+COPY books (id, author, book_name) FROM stdin;
+1	J.K.Rolling	Harry Potter
+6	Unknown	Harry Potter
+3	Dan Brown	The Inferno
+8	Unknown	The Dragonlance
+7	Gregory David Roberts	Shantaram
+\.
+
+
+--
+-- TOC entry 2374 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: library_managing
+--
+
+SELECT pg_catalog.setval('hibernate_sequence', 8, true);
+
+
+--
+-- TOC entry 2249 (class 2606 OID 26369)
+-- Name: books_pkey; Type: CONSTRAINT; Schema: public; Owner: library_managing
+--
+
+ALTER TABLE ONLY books
+    ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2372 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-10-10 19:31:21 EEST
+
+--
+-- PostgreSQL database dump complete
+--
+

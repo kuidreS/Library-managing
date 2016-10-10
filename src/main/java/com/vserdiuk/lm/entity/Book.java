@@ -28,6 +28,7 @@ public class Book implements Serializable {
     }
 
     public Book(BookBuilder bookBuilder) {
+        this.id = bookBuilder.id;
         this.bookName = bookBuilder.bookName;
         this.author = bookBuilder.author;
     }
@@ -83,15 +84,21 @@ public class Book implements Serializable {
     }
 
     public static class BookBuilder {
+        private Long id;
         private String bookName;
         private String author = "Unknown";
 
-        public BookBuilder buildByBookName(String bookName) {
+        public BookBuilder buildId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BookBuilder buildBookName(String bookName) {
             this.bookName = bookName;
             return this;
         }
 
-        public BookBuilder buildByAuthor(String author) {
+        public BookBuilder buildAuthor(String author) {
             this.author = author;
             return this;
         }

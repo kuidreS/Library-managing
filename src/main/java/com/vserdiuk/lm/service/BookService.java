@@ -28,49 +28,31 @@ public class BookService {
 
     public void saveBook(Book book) {
         bookRepository.save(book);
-        System.out.println("Book " + book.getAuthor() + " \"" + book.getBookName() + "\" " + "has been deleted");
     }
 
-    public void addBook(String inputBook) {
-        String[] splitedBook = splitBookByAuthorAndTitle(inputBook);
-        Book book = getBookFromArray(splitedBook);
+    public void addBook(String author, String bookName) {
+        Book book;
+        if (author.equals("")) {
+            book = new Book.BookBuilder()
+                    .buildBookName(bookName)
+                    .build();
+        } else {
+            book = new Book.BookBuilder()
+                    .buildAuthor(author)
+                    .buildBookName(bookName)
+                    .build();
+        }
         bookRepository.save(book);
         System.out.println("Book " + book.getAuthor() + " \"" + book.getBookName() + "\" " + "has been added");
     }
 
     public void deleteBook(Book book) {
         bookRepository.delete(book);
+        System.out.println("Book " + book.getAuthor() + " \"" + book.getBookName() + "\" " + "has been deleted");
     }
 
     private Book getBookById(Long id) {
         return bookRepository.findOne(id);
-    }
-    
-    public String[] splitBookByAuthorAndTitle(String inputBook) {
-        String[] splitedBook = inputBook.split(" \"");
-        if(splitedBook.length > 1) {
-            splitedBook[1] = splitedBook[1].substring(0, splitedBook[1].length()-1);
-        } else {
-            splitedBook[0] = splitedBook[0].substring(1);
-            splitedBook[0] = splitedBook[0].substring(0, splitedBook[0].length()-1);
-        }
-        return splitedBook;
-    }
-
-    private Book getBookFromArray(String[] splitedBook) {
-        int arrayLength = splitedBook.length;
-        Book book;
-        if (arrayLength > 1) {
-            book = new Book.BookBuilder()
-                    .buildByAuthor(splitedBook[0])
-                    .buildByBookName(splitedBook[1])
-                    .build();
-        } else {
-            book = new Book.BookBuilder()
-                    .buildByBookName(splitedBook[0])
-                    .build();
-        }
-        return book;
     }
 
 }
